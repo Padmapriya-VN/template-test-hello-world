@@ -44,7 +44,6 @@ spec:
         values:
           name: ${{ parameters.name }}
           age: ${{ parameters.age }}
-          repoName: ${{ (parameters.repoUrl | parseRepoUrl)['repo'] }}
 
     - id: publish-to-git
       name: Create Pull Request
