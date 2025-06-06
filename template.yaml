@@ -40,13 +40,13 @@ spec:
       action: fetch:template
       input:
         url: ./skeleton
-        targetPath: ./repo
+        targetPath: ./output
         values:
           name: ${{ parameters.name }}
           age: ${{ parameters.age }}
           repoName: ${{ (parameters.repoUrl | parseRepoUrl)['repo'] }}
 
-    - id: create-pr
+    - id: publish-to-git
       name: Create Pull Request
       action: publish:github:pull-request
       input:
@@ -56,6 +56,6 @@ spec:
         description: |
           This PR adds:
           - HelloWorld.txt with content populated from template
-        sourcePath: ./repo
+        sourcePath: ./output
         # here's where the secret can be used
         token: ${{ secrets.USER_OAUTH_TOKEN }}
