@@ -6,7 +6,7 @@ metadata:
   title: Test template by VNP
   description: Test template for learning
 spec:
-  owner: defalut
+  owner: default
   type: service
   
   parameters:
@@ -30,21 +30,10 @@ spec:
           title: Name
           type: string
           description: Enter your name
-          ui:autofocus: true
         age:
           title: Age
           type: integer
           description: Enter your age
-    - title: Enter Official data
-      properties:
-        company:
-          title: Company name
-          type: string
-          description: Enter your company name
-        designation:
-          title: Designation
-          type: string
-          description: Enter your designation
           
   steps:
     - id: fetch-template
@@ -56,9 +45,8 @@ spec:
         values: 
           name: ${{ parameters.name }}
           age: ${{ parameters.age }}
-          company: ${{ parameters.company }}
-          designation: ${{parameters.designation}}
-
+          repoName: ${{ (parameters.repoUrl | parseRepoUrl)['repo'] }}
+          
     - id: publish-to-git
       name: Publish to Git
       action: publish:github:pull-request
