@@ -1,0 +1,76 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+# some metadata about the template itself
+metadata:
+  name: try-vnp-samp-template
+  title: Test template by VNP
+  description: Test template for learning
+spec:
+  owner: padmapriya-vn
+  type: service
+  parameters:
+    - title: Provide Repository Info
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: GitHub Repository URL
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            requestUserCredentials:
+              secretsKey: USER_OAUTH_TOKEN
+            allowedHosts:
+              - github.com
+    - title: Enter Personal data
+      required:
+        - name
+        - age
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Enter your name
+          ui:autofocus: true
+        age:
+          title: Age
+          type: integer
+          description: Enter your age
+    - title: Enter Official data
+      required:
+        - company
+        - designation
+      properties:
+        company:
+          title: Company name
+          type: string
+          description: Enter your company name
+        designation:
+          title: Designation
+          type: string
+          description: Enter your designation
+  steps:
+    - id: fetch-template
+      name: Fetch Template file
+      action: fetch:template
+      input:
+        url: ./skeleton
+        targetpath: ./output
+        values: 
+          name: ${{ parameters.name }}
+          age: ${{ parameters.age }}
+          company: ${{ parameters.company }}
+          designation: ${{parameters.designation}}
+
+    - id: publish-to-git
+      name: Publish to Git
+      action: publish:github:pull-request
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+        branchName: add-hello-world
+        title: 'Add HelloWorld.txt'
+        description: |
+          PR includes:
+          - HelloWorld.txt with your input details
+        sourcePath: ./output
+        token: ${{ secrets.USER_OAUTH_TOKEN }}
