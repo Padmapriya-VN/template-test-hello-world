@@ -42,8 +42,8 @@ spec:
         url: ./skeleton
         targetPath: ./repo
         values:
-          projectName: ${{ parameters.name }}
-          description: ${{ parameters.age }}
+          name: ${{ parameters.name }}
+          age: ${{ parameters.age }}
           repoName: ${{ (parameters.repoUrl | parseRepoUrl)['repo'] }}
 					
     - id: create-pr
