@@ -9,12 +9,12 @@ spec:
   type: service
   
   parameters:
-    - title: Provide Existing Repository Information
+    - title: Provide Repository Info
       required:
         - repoUrl
       properties:
         repoUrl:
-          title: Repository URL
+          title: GitHub Repository URL
           type: string
           ui:field: RepoUrlPicker
           ui:options:
@@ -33,6 +33,16 @@ spec:
           title: Description
           type: string
           description: Project description
+    - title: HelloWorld1 Details
+      properties:
+        company:
+          title: company Name
+          type: string
+          description: Name of the company
+        desg:
+          title: desg
+          type: string
+          description: Project desg
 
   steps:
     - id: fetch-template
@@ -44,7 +54,9 @@ spec:
         values:
           name: ${{ parameters.name }}
           age: ${{ parameters.age }}
-
+          company: ${{ parameters.company }}
+          desg: ${{ parameters.desg }}
+          
     - id: publish-to-git
       name: Create Pull Request
       action: publish:github:pull-request
