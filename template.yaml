@@ -32,7 +32,7 @@ spec:
           description: Enter your name
         age:
           title: Age
-          type: integer
+          type: string
           description: Enter your age
           
   steps:
