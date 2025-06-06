@@ -6,8 +6,9 @@ metadata:
   title: Test template by VNP
   description: Test template for learning
 spec:
-  owner: padmapriya-vn
+  owner: default
   type: service
+  
   parameters:
     - title: Provide Repository Info
       required:
