@@ -1,9 +1,9 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: hello-world-template
-  title: Hello World Demo
-  description: Adds a HelloWorld.txt file to an existing github repo
+  name: vnp-template-hello-world
+  title: Hello World Demo by VNP
+  description: VNP ---- Adds a HelloWorld.txt file to an existing github repo
 spec:
   owner: default
   type: service
