@@ -1,21 +1,20 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
-# some metadata about the template itself
 metadata:
-  name: try-vnp-samp-template
-  title: Test template by VNP
-  description: Test template for learning
+  name: vnp-template-hello-world
+  title: Hello World Demo by VNP
+  description: VNP ---- Adds a HelloWorld.txt file to an existing github repo
 spec:
   owner: default
   type: service
   
   parameters:
-    - title: Provide Repository Info
+    - title: Provide Existing Repository Information
       required:
         - repoUrl
       properties:
         repoUrl:
-          title: GitHub Repository URL
+          title: Repository URL
           type: string
           ui:field: RepoUrlPicker
           ui:options:
@@ -23,39 +22,39 @@ spec:
               secretsKey: USER_OAUTH_TOKEN
             allowedHosts:
               - github.com
-              
-    - title: Enter Personal data
+        
+    - title: HelloWorld Details
       properties:
-        name:
-          title: Name
+        projectName:
+          title: Project Name
           type: string
-          description: Enter your name
-        age:
-          title: Age
+          description: Name of the project
+        description:
+          title: Description
           type: string
-          description: Enter your age
-          
+          description: Project description
+
   steps:
     - id: fetch-template
-      name: Fetch Template file
+      name: Fetch Documentation Template
       action: fetch:template
       input:
         url: ./skeleton
-        targetpath: ./repo
-        values: 
-          name: ${{ parameters.name }}
-          age: ${{ parameters.age }}
+        targetPath: ./repo
+        values:
+          projectName: ${{ parameters.projectName }}
+          description: ${{ parameters.description }}
           repoName: ${{ (parameters.repoUrl | parseRepoUrl)['repo'] }}
-          
-    - id: publish-to-git
-      name: Publish to Git
+    - id: create-pr
+      name: Create Pull Request
       action: publish:github:pull-request
       input:
         repoUrl: ${{ parameters.repoUrl }}
-        branchName: add-hello-world
-        title: 'Add HelloWorld.txt'
+        branchName: backstage-helloworld
+        title: 'demo: Add HelloWorld.txt using a Backstage Template'
         description: |
-          PR includes:
-          - HelloWorld.txt with your input details
+          This PR adds:
+          - HelloWorld.txt with content populated from template
         sourcePath: ./repo
+        # here's where the secret can be used
         token: ${{ secrets.USER_OAUTH_TOKEN }}
