@@ -3,5 +3,6 @@ Hello World----- by vnp!
 This file was created using a Backstage template.
 name : ${{ values.name }}
 age : ${{ values.age }}
-
+company : ${{ values.company }}
+desg : ${{ values.desg }}
 
