@@ -1,0 +1,5 @@
+HI... This template is my first sample template i am trying...
+My name: ${{values.name}}
+My age: ${{values.age}}
+my designation: ${{values.designation}}
+my company: ${{values.company}}
