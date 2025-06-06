@@ -1,9 +1,7 @@
 Hello World----- by vnp!
 
 This file was created using a Backstage template.
+name : ${{ values.name }}
+age : ${{ values.age }}
 
-Values:
-parameters.projectName -> values.projectName : ${{ values.name }}
-parameters.description -> values.description : ${{ values.age }}
-(parameters.repoUrl | parseRepoUrl)['repo'] -> values.repoName : ${{ values.repoName }}
 
