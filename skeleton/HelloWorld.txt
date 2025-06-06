@@ -1,5 +1,9 @@
-HI... This template is my first sample template i am trying...
-My name: ${{values.name}}
-My age: ${{values.age}}
-my designation: ${{values.designation}}
-my company: ${{values.company}}
+Hello World----- by vnp!
+
+This file was created using a Backstage template.
+
+Values:
+parameters.projectName -> values.projectName : ${{ values.name }}
+parameters.description -> values.description : ${{ values.age }}
+(parameters.repoUrl | parseRepoUrl)['repo'] -> values.repoName : ${{ values.repoName }}
+
